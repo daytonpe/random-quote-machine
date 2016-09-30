@@ -1,0 +1,27 @@
+
+
+p{
+
+}
+
+h1{
+	color: green;
+}
+body {
+    background-color: lightblue;
+}
+
+.container{
+
+	
+}
+
+.quotebox{
+	text-align: center;
+	margin: auto;
+	margin-top: 15%;
+	padding: 15px;
+	background-color: white;
+	width: 30%;
+	border-radius: 10px;
+}
