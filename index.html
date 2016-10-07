@@ -1,6 +1,9 @@
+
+
 <!DOCTYPE html>
 
 <html>
+
 
 <head>
 	<title>Random Quote Generator</title>
@@ -11,16 +14,18 @@
 </head>
 
 <body>
-	
+
 	<script>
 		$(document).ready(function() {
 			$("#getMessage").on("click", function(){
-
-      $(".message").html("Here is the quote.");
-    	});
+				$.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=",
+				 function(response) {
+				  $(".message").html(response[0].content);
+				});
+	 		});
+	 		cache: false
 		});
 	</script>
-
 
 	<div class="container-fluid">
 		<div class = "row text-center">
@@ -39,30 +44,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-<!-- 		<div class="container">
-
-			<div class="quotebox">
-				<script>
-					$(document).ready(function(){
-
-						html+="<p>";
-
-						html +=""
-
-					})
-				</script>
-			</div>
-
-
-			<div class="quotebox">
-				<p>"this is where the quote will go"</p>
-				<p>-Tagore</p>
-			</div>
-
-		</div> -->
 </body>
 
 </html>
