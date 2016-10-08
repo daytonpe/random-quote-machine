@@ -26,6 +26,7 @@
 			        // $('#quote-title').text(post.title);
 			        // $('#quote-content').html(post.content);
 			        $(".message").html(post.content);
+			        $(".author").html(post.title);
 
 			        // If the Source is available, use it. Otherwise hide it.
 			        // if (typeof post.custom_meta !== 'undefined' && typeof post.custom_meta.Source !== 'undefined') {
@@ -46,8 +47,11 @@
 			<h2>Random Quote Generator</h2>
 		</div>
 		<div class = "row text-center">
-			<div class = "col-xs-12 well message">
-				The message will go here
+			<div class = "col-md-5 col-centered">
+				<div class="well">
+					<span class="message">Quote of the Day</span>
+					<span class="author">Quote of the Day</span>
+				</div>
 			</div>
 		</div>
 		<div class = "row text-center">

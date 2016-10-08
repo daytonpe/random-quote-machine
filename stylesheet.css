@@ -30,3 +30,14 @@ body {
 	text-align: center;
 	margin-top: 30px;
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.message{
+	text-align: left;
+	padding-left: 10%;
+	padding-right: 10%;
+}
