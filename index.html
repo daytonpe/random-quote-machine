@@ -20,26 +20,19 @@
 		$(document).ready(function() {
 			$('#getMessage').on('click', function(e) {
 			  e.preventDefault();
-			    $.ajax( {
-			      url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
-			      success: function(data) {
-			        var post = data.shift(); // The data is an array of posts. Grab the first one.
-			        // $('#quote-title').text(post.title);
-			        // $('#quote-content').html(post.content);
-			        $(".message").html(post.content);
-			        $(".author").html(post.title);
-
-			        // If the Source is available, use it. Otherwise hide it.
-			        // if (typeof post.custom_meta !== 'undefined' && typeof post.custom_meta.Source !== 'undefined') {
-			        //   $('#quote-source').html('Source:' + post.custom_meta.Source);
-			        // } else {
-			        //   $('#quote-source').text('');
-			        // }
-			      },
-			      cache: false
-			    });
-			  });
+		    $.ajax( {
+		      url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
+		      success: function(data) {
+		      	// console.log(post);
+		        var post = data.shift(); // The data is an array of posts. Grab the first one.
+		        // $(".message").html('<i class="fa fa-quote-left"></i><span>'+post.content+'</span><i class="fa fa-quote-right"></i>');
+		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3));
+		        $(".author").html('-' + post.title);
+		      },
+		      cache: false
+		    });
 			});
+		});
 
 	</script>
 
@@ -47,15 +40,18 @@
 		<div class = "row text-center">
 			<div class = "col-md-4 col-centered">
 				<div class="well">
-					<p class="message">Quote</p>
-					<p class="author smallprint">--Author</p>
-					<p id="buttonP" class="smallprint" "><button id = "getMessage" class = "btn btn-primary smallprint">New Quote</button></p>
-					<a target="_blank" class="twitter-share-button€" href="https://twitter.com/intent/tweet"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+					
+					<p class="message"><i class="fa fa-quote-left" aria-hidden="true"></i> Quote</p>
+					<p class="author smallprint">-Author</p>
+					<p id="buttonP" class="smallprint" "><button id = "getMessage" class = "btn btn-primary smallprint">New Quote</button>
+					<a target="_blank" class="twitter-share-button€ pull-left" href="https://twitter.com/intent/tweet">
+						<i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
+					</a>
+					</p>
 				</div>
+				<p style="font-size: 12px">by daytonpe</p>
 			</div>
 		</div>
-
-
 	</div>
 </body>
 
