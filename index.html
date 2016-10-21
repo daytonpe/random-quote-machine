@@ -14,49 +14,29 @@
 <body>
 
 	<script>
+		function fetchQuote() {
+			$.ajax({
+				url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
+		      success: function(data) {
+		        var post = data.shift(); // The data is an array of posts. Grab the first one.
+		        var quoteContent = post.content;
+		        var quoteAuthor = post.title;
+		        $('#tweet-quote').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + quoteContent.slice(3,quoteContent.length-5) + '-' +quoteAuthor);		
+		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3)); 
+		        $(".author").html('-' + post.title);
+		      },
+		      cache: false
+			});
+			}
+
 		$(document).ready(function() {
 			// LOAD INITIAL QUOTE
-			$.ajax( {
-		      url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
-		      success: function(data) {
-		      	// console.log(post);
-		        var post = data.shift(); // The data is an array of posts. Grab the first one.
-		        var quoteContent = post.content;
-		        var quoteAuthor = post.title;
-		        // $(".message").html('<i class="fa fa-quote-left"></i><span>'+post.content+'</span><i class="fa fa-quote-right"></i>');
-		      	$('#tweet-quote').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + quoteContent.slice(3,quoteContent.length-5) + '-' +quoteAuthor +' #FCC ');		
-		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3)); 
-		        // content comes with p tag so we have to slice the first 3 characters out in order to add inline font awesome quote
-		        $(".author").html('-' + post.title);
-		      },
-		      cache: false
-		    });
+				fetchQuote();
 
 			// LOAD SUBSEQUENT QUOTES ON CLICK
-			$('#getMessage').on('click', function(e) {
-			  e.preventDefault();
-		    $.ajax( {
-		      url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
-		      success: function(data) {
-		      	// console.log(post);
-		        var post = data.shift(); // The data is an array of posts. Grab the first one.
-		        var quoteContent = post.content;
-		        var quoteAuthor = post.title;
-		        // $(".message").html('<i class="fa fa-quote-left"></i><span>'+post.content+'</span><i class="fa fa-quote-right"></i>');
-		      	$('#tweet-quote').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + quoteContent.slice(3,quoteContent.length-5) + '-' +quoteAuthor +' #FCC ');	
-		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3)); // content comes with p tag so we have to slice the first 3 characters out in order to add inline font awesome quote
-		        $(".author").html('-' + post.title);
-		      },
-		      cache: false
-		    });
+			$('#getMessage').on('click', function() {
+		    fetchQuote();
 			});
-
-		  $('#tweet-quote').on('click', function() {
-
-		      // location.href = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=poop';
-		      // + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
-
-		  });
 
 
 		});
