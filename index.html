@@ -15,6 +15,7 @@
 
 	<script>
 		$(document).ready(function() {
+			// LOAD INITIAL QUOTE
 			$.ajax( {
 		      url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
 		      success: function(data) {
@@ -27,6 +28,8 @@
 		      },
 		      cache: false
 		    });
+
+			// LOAD SUBSEQUENT QUOTES ON CLICK
 			$('#getMessage').on('click', function(e) {
 			  e.preventDefault();
 		    $.ajax( {
@@ -35,13 +38,24 @@
 		      	// console.log(post);
 		        var post = data.shift(); // The data is an array of posts. Grab the first one.
 		        // $(".message").html('<i class="fa fa-quote-left"></i><span>'+post.content+'</span><i class="fa fa-quote-right"></i>');
+		        var quoteContent = post.content;
 		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3)); 
 		        // content comes with p tag so we have to slice the first 3 characters out in order to add inline font awesome quote
+		        var quoteAuthor = post.title;
 		        $(".author").html('-' + post.title);
 		      },
 		      cache: false
 		    });
 			});
+
+		  $('#tweet-quote').on('click', function() {
+
+		      location.href = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=poop';
+		      // + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
+
+		  });
+
+
 		});
 
 	</script>
@@ -54,8 +68,8 @@
 					<p class="message"><i class="fa fa-quote-left" aria-hidden="true"></i> </p>
 					<p class="author smallprint">-Author</p>
 					<p id="buttonP" class="smallprint" "><button id = "getMessage" class = "btn btn-primary smallprint">New Quote</button>
-					<a target="_blank" class="twitter-share-button€ pull-left" href="https://twitter.com/intent/tweet">
-						<i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
+					<a target="_blank" id="tweet-quote" class="pull-left button">
+						<i class="fa fa-twitter-square fa-3x"></i>
 					</a>
 					</p>
 				</div>
