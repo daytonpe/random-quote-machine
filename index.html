@@ -21,7 +21,10 @@
 		      success: function(data) {
 		      	// console.log(post);
 		        var post = data.shift(); // The data is an array of posts. Grab the first one.
+		        var quoteContent = post.content;
+		        var quoteAuthor = post.title;
 		        // $(".message").html('<i class="fa fa-quote-left"></i><span>'+post.content+'</span><i class="fa fa-quote-right"></i>');
+		      	$('#tweet-quote').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + quoteContent.slice(3,quoteContent.length-5) + '-' +quoteAuthor +' #FCC ');		
 		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3)); 
 		        // content comes with p tag so we have to slice the first 3 characters out in order to add inline font awesome quote
 		        $(".author").html('-' + post.title);
@@ -37,11 +40,11 @@
 		      success: function(data) {
 		      	// console.log(post);
 		        var post = data.shift(); // The data is an array of posts. Grab the first one.
-		        // $(".message").html('<i class="fa fa-quote-left"></i><span>'+post.content+'</span><i class="fa fa-quote-right"></i>');
 		        var quoteContent = post.content;
-		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3)); 
-		        // content comes with p tag so we have to slice the first 3 characters out in order to add inline font awesome quote
 		        var quoteAuthor = post.title;
+		        // $(".message").html('<i class="fa fa-quote-left"></i><span>'+post.content+'</span><i class="fa fa-quote-right"></i>');
+		      	$('#tweet-quote').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + quoteContent.slice(3,quoteContent.length-5) + '-' +quoteAuthor +' #FCC ');	
+		        $(".message").html('<p> <i class="fa fa-quote-left"></i>'+ ' ' +post.content.slice(3)); // content comes with p tag so we have to slice the first 3 characters out in order to add inline font awesome quote
 		        $(".author").html('-' + post.title);
 		      },
 		      cache: false
@@ -50,7 +53,7 @@
 
 		  $('#tweet-quote').on('click', function() {
 
-		      location.href = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=poop';
+		      // location.href = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=poop';
 		      // + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
 
 		  });
